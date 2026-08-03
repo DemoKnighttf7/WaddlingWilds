@@ -10,7 +10,8 @@ public class BasicMovementScript : MonoBehaviour
     public float moveSpeed = 10f;
     public float jumpSpeed = 12f;
 
-    Animator anim;
+    public GameObject cam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +31,13 @@ public class BasicMovementScript : MonoBehaviour
         }
 
         rb2d.velocity = new Vector2(nextVelocityX, nextVelocityY);
+    }
+
+
+    //IMPORTANT!!! MOVE TO MAIN PLAYER
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("CameraZone")) {
+            cam.GetComponent<CameraFollow>().cameraZone = collision.gameObject;
+        }
     }
 }

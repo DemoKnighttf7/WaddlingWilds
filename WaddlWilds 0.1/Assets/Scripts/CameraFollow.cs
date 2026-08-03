@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public float speedMod = 0.01f;
+    public float speedMod = 0.5f;
     public GameObject player;
     public GameObject cameraZone;
+    public Vector3 velocity = new Vector3(0, 0, 0);
     
     void LateUpdate()
     {
-        float newX = transform.position.x;
-        float newY = transform.position.y;
+        float playerX = 0;
+        float playerY = 0;
+
         if(player != null) {
-            float distX = player.transform.position.x - transform.position.x;
-            float distY = player.transform.position.y - transform.position.y;
-            newX = transform.position.x + distX*speedMod;
-            newY = transform.position.y + distY*speedMod;
+            playerX = player.transform.position.x;
+            playerY = player.transform.position.y;
         }
 
         if (cameraZone != null) {
@@ -25,12 +25,33 @@ public class CameraFollow : MonoBehaviour
             float xRange = bcd.size.x / 2f;
             float yRange = bcd.size.y / 2f;
 
-            newX = Mathf.Min(newX, cameraZone.transform.position.x + xRange);
-            newX = Mathf.Max(newX, cameraZone.transform.position.x - xRange);
-            newY = Mathf.Min(newX, cameraZone.transform.position.y + yRange);
-            newY = Mathf.Max(newX, cameraZone.transform.position.y - yRange);
+            Camera cam = GetComponent<Camera>();
+
+            float camHeight = cam.orthographicSize;
+            float camWidth = camHeight * cam.aspect;
+            
+            xRange -= camWidth;
+            yRange -= camHeight;
+
+            
+
+            float zoneX = cameraZone.transform.position.x + bcd.offset.x;
+            float zoneY = cameraZone.transform.position.y + bcd.offset.y;
+
+            float lowXBound = zoneX - xRange;
+            float highXBound = zoneX + xRange;
+
+            float lowYBound = zoneY - yRange;
+            float highYBound = zoneY + yRange;
+
+            playerX = Mathf.Min(playerX, highXBound);
+            playerX = Mathf.Max(playerX, lowXBound);
+            playerY = Mathf.Min(playerY, highYBound);
+            playerY = Mathf.Max(playerY, lowYBound);
         }
-        transform.position = new Vector3(newX, newY, transform.position.z);
+
+        
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(playerX, playerY, transform.position.z), ref velocity, speedMod);
     }
     public void shake(float heavyness) {
         transform.position = new Vector3(transform.position.x + Random.Range(-heavyness, heavyness), transform.position.y + Random.Range(-heavyness, heavyness), transform.position.z);
