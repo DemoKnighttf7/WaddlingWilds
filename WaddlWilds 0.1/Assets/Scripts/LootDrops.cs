@@ -18,7 +18,7 @@ public class LootDrops : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(Random.Range(-spread, spread), Random.Range(spread*0.5f, spread));
+        rb.velocity = new Vector2(Random.Range(-spread, spread), Random.Range(spread*0.5f, spread*2.5f));
         startTime = Time.time;
 
         player = GameObject.FindWithTag("Player");

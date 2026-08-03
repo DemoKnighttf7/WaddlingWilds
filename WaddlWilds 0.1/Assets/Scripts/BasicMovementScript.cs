@@ -32,10 +32,6 @@ public class BasicMovementScript : MonoBehaviour
             nextVelocityY = jumpSpeed;
         }
 
-        if(Input.GetKey(KeyCode.F)) {
-            Instantiate(loot, new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), transform.rotation);
-        }
-
         rb2d.velocity = new Vector2(nextVelocityX, nextVelocityY);
     }
 
