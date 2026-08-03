@@ -29,9 +29,8 @@ public class CameraFollow : MonoBehaviour
             newX = Mathf.Max(newX, cameraZone.transform.position.x - xRange);
             newY = Mathf.Min(newX, cameraZone.transform.position.y + yRange);
             newY = Mathf.Max(newX, cameraZone.transform.position.y - yRange);
-
-            transform.position = new Vector3(newX, newY, transform.position.z);
         }
+        transform.position = new Vector3(newX, newY, transform.position.z);
     }
     public void shake(float heavyness) {
         transform.position = new Vector3(transform.position.x + Random.Range(-heavyness, heavyness), transform.position.y + Random.Range(-heavyness, heavyness), transform.position.z);
