@@ -20,6 +20,9 @@ public class LootDrops : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(Random.Range(-spread, spread), Random.Range(spread*0.5f, spread));
         startTime = Time.time;
+
+        player = GameObject.FindWithTag("Player");
+        //Physics.IgnoreCollision(GetComponent<Collider>(), player.GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -35,8 +38,14 @@ public class LootDrops : MonoBehaviour
                 //rb.velocity = -10f * dist.normalized;
             }
             if(picked) {
-                rb.velocity = new Vector2(rb.velocity.x + dist.x * 0.1f, rb.velocity.y + dist.y * 0.2f);
+                rb.velocity = new Vector2(rb.velocity.x + dist.x * 0.4f, rb.velocity.y + dist.y * 0.4f);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            Destroy(gameObject);
         }
     }
 }

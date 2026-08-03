@@ -12,6 +12,8 @@ public class BasicMovementScript : MonoBehaviour
 
     public GameObject cam;
 
+    public GameObject loot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,10 @@ public class BasicMovementScript : MonoBehaviour
         if(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
             nextVelocityY = jumpSpeed;
+        }
+
+        if(Input.GetKey(KeyCode.F)) {
+            Instantiate(loot, new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), transform.rotation);
         }
 
         rb2d.velocity = new Vector2(nextVelocityX, nextVelocityY);
