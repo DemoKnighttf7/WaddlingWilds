@@ -12,6 +12,8 @@ public class BasicMovementScript : MonoBehaviour
 
     public GameObject cam;
 
+    public GameObject loot;
+
     // Start is called before the first frame update
     void Start()
     {
