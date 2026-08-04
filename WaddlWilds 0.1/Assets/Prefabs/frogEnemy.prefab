@@ -251,7 +251,7 @@ MonoBehaviour:
   attackInterval: 3
   atkDist: 12
   shotSpeed: 20
-  backCoeif: -0.1
+  backCoeif: -0.2
 --- !u!61 &3000174680835311663
 BoxCollider2D:
   m_ObjectHideFlags: 0
