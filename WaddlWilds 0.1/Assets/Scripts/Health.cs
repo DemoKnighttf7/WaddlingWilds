@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 {
     public float MaxHP;
     public float currentHP;
-    private TMP_Text hitPoints;
+    public TMP_Text hitPoints;
     public int lootBottomRange;
     public int lootTopRange;
 
@@ -19,7 +19,9 @@ public class Health : MonoBehaviour
     {
         currentHP = MaxHP;
 
-        hitPoints = transform.Find("Canvas/Hitpts").GetComponent<TMP_Text>();
+        if(hitPoints == null) {
+            hitPoints = transform.Find("Canvas/Hitpts").GetComponent<TMP_Text>();
+        }
 
         string hitString = "";
         for (int i = 0; i < currentHP; i++) {
@@ -54,6 +56,8 @@ public class Health : MonoBehaviour
                     Instantiate(loot, transform.position, transform.rotation);
                 }
             }
+
+            hitPoints.text = "";
             Destroy(gameObject);
         }
     }
