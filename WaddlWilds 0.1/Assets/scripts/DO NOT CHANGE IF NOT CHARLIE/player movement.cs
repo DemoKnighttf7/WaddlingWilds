@@ -20,6 +20,9 @@ public class playermovement : MonoBehaviour
     public float groundCheckRadius;
     public Transform GroundCheckPoint;
     public LayerMask groundLayer;
+
+    public float swimTurnSpeed;
+    public float swimSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +34,15 @@ public class playermovement : MonoBehaviour
         return Physics2D.OverlapCircle(GroundCheckPoint.position, groundCheckRadius, groundLayer);
     }
     // Update is called once per frame
-    public void checkState()
+    // has to be called overridevar because override causes errors
+    public void checkState(string overrideVar = "none")
     {
         bool grounded = checkGrounded();
-        if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
+        if ((overrideVar == "swimming" || state == "swimming") && overrideVar != "walking")
+        {
+            state = "swimming";
+        }
+        else if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
         {
             state = "dashing";
         }
@@ -43,7 +51,57 @@ public class playermovement : MonoBehaviour
             state = "walking";
         }
     }
-    void Update()
+
+    public float swimmingDirection()
+    {
+        float swimDir = 0;
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            if (transform.eulerAngles.z > -90 && transform.eulerAngles.z < 90)
+            {
+                swimDir = (Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
+            }
+            else if (transform.eulerAngles.z != 90 && transform.eulerAngles.z != -90)
+            {
+                swimDir = -(Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
+            }
+        }
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            if (transform.eulerAngles.z < 0 && transform.eulerAngles.z > 180)
+            {
+                swimDir += Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
+            }
+            else if (transform.eulerAngles.z != 0 && transform.eulerAngles.z != 180)
+            {
+                swimDir -= Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
+            }
+        }
+        if (swimDir != 0)
+        {
+            swimDir = Mathf.Abs(swimDir) / swimDir;
+        }
+
+        return swimDir;
+    }
+
+    public void swimAngleFinder()
+    {
+        float returnAngle = 0;
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+        if (rb2d.velocity.y >= 0)
+        {
+            returnAngle = (Mathf.Acos(rb2d.velocity.normalized.x)*Mathf.Rad2Deg)-90;
+        }
+        else
+        {
+            returnAngle = -(Mathf.Acos(rb2d.velocity.normalized.x))*Mathf.Rad2Deg-90;
+        }
+        transform.eulerAngles = new Vector3(0, 0, returnAngle);
+        print(returnAngle);
+    }
+
+    void LateUpdate()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
@@ -75,7 +133,7 @@ public class playermovement : MonoBehaviour
             }
             rb2d.velocity = new Vector2 (xvelocity, yvelocity);
         }
-        if (state == "dashing")
+        else if (state == "dashing")
         {
             print("dashed");
             if (canDash)
@@ -87,7 +145,6 @@ public class playermovement : MonoBehaviour
             }
             else if (grounded && rb2d.velocity.y < 0)
             {
-                print("Fucking up in else if grounded");
             state = "walking";
             if ((Input.GetKey(KeyCode.Space)))
                 {
@@ -110,6 +167,21 @@ public class playermovement : MonoBehaviour
             }
             dashTimer -= Time.deltaTime;
             canDash = false;
+        }
+        else if (state == "swimming")
+        {
+            rb2d.velocity = new Vector2 (0, 0); 
+            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+swimmingDirection()*swimTurnSpeed*Time.deltaTime);
+            transform.position = transform.position + new Vector3(Mathf.Cos((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), 0)*Time.deltaTime * swimSpeed;
+        }
+        if (state != "swimming")
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+        else
+        {
+            rb2d.constraints = RigidbodyConstraints2D.None;
         }
     }
 }
