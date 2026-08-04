@@ -16,9 +16,6 @@ public class playermovement : MonoBehaviour
     public float dashSpeed;
     public float dashTimer;
     public float dashLength;
-    public Vector3 maxdistance = new Vector3(0, 999999, 0);
-    public RaycastHit dashHit;
-    public bool noHold;
 
     public float groundCheckRadius;
     public Transform GroundCheckPoint;
@@ -37,7 +34,7 @@ public class playermovement : MonoBehaviour
     public void checkState()
     {
         bool grounded = checkGrounded();
-        if (((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing") && !noHold)
+        if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
         {
             state = "dashing";
         }
@@ -51,10 +48,6 @@ public class playermovement : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
         bool grounded = checkGrounded();
-        if (!Input.GetKeyDown(KeyCode.F)) 
-        {
-            noHold = false;
-        }
         if (grounded && state != "dashing")
         {
             canDash = true;
@@ -87,26 +80,25 @@ public class playermovement : MonoBehaviour
             print("dashed");
             if (canDash)
             {
-                print("Can dash is true");
                 dashTimer = dashLength;
                 Vector2 dashDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
                 rb2d.velocity = dashDirection * dashSpeed;
-                
+
             }
-            else if (grounded)
+            else if (grounded && rb2d.velocity.y < 0)
             {
+                print("Fucking up in else if grounded");
             state = "walking";
-            if (!(Input.GetKeyDown(KeyCode.Space)))
+            if ((Input.GetKey(KeyCode.Space)))
                 {
-                    rb2d.velocity = Vector2.zero;
+                    Vector2 dashDirection = new Vector2(Input.GetAxis("Horizontal"), -(Input.GetAxis("Vertical"))).normalized;
+                    print(dashDirection);
+                    rb2d.velocity = new Vector2(dashDirection.x, dashDirection.y/3) * dashSpeed;
                 }
                 else
                 {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x ,-(rb2d.velocity.y));
-                }
-                if (!Input.GetKey(KeyCode.F))
-                {
-                    noHold = true;
+
+                    rb2d.velocity = new Vector2(0, 0);
                 }
                 dashTimer = 0;
             }
@@ -115,10 +107,6 @@ public class playermovement : MonoBehaviour
 
                 rb2d.velocity = new Vector2(0, 0);
                 state = "walking";
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    noHold = true;
-                }
             }
             dashTimer -= Time.deltaTime;
             canDash = false;
