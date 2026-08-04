@@ -8,7 +8,7 @@ public class SeedMaker : MonoBehaviour
     public int randomizer;
     public float pickDist = 3f;
 
-    public GameObject player;
+    private GameObject player;
     public GameObject loot;
 
     private GameObject pressF;
