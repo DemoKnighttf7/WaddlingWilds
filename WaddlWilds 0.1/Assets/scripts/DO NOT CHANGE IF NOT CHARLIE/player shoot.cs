@@ -50,8 +50,17 @@ public class playershoot : MonoBehaviour
     }
     void Update()
     {
-        transform.position = player.transform.position+offsetAmount;
-        rotation = findAngle();
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        if (player.GetComponent<playermovement>().state != "swimming")
+        {
+            transform.position = player.transform.position + offsetAmount;
+            renderer.enabled = true;
+        }
+        else
+        {
+            renderer.enabled = false;
+        }
+            rotation = findAngle();
         transform.Rotate(0f, 0f, rotation - transform.eulerAngles.z, Space.Self);
     }
 }
