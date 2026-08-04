@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ratAI : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
 
     public float moveSpeed;
     public float damage;
@@ -21,15 +21,21 @@ public class ratAI : MonoBehaviour
     private float lastIdleMove;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     private bool attacking = false;
 
     private float lastAttack;
 
+    private GameObject cam;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        cam = GameObject.FindWithTag("MainCamera");
+
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         lastIdleMove = Time.time;
         lastAttack = Time.time;
     }
@@ -50,6 +56,7 @@ public class ratAI : MonoBehaviour
         if(dist < attackRange) {
             if(Time.time - lastAttack > attackInterval) { //ATTACK HERE
                 player.GetComponent<Health>().Damage(damage);
+                cam.GetComponent<CameraFollow>().shake(0.2f);
                 lastAttack = Time.time;
             }
         }
@@ -72,9 +79,9 @@ public class ratAI : MonoBehaviour
         }
 
         if(rb.velocity.x > 0) { //ROTATE TO FACE MOVE DIR
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * 1f, transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = false;
         } else {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1f, transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = true;
         }
     }
 }
