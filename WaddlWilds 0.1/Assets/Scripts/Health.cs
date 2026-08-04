@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
         if(hitPoints != null) {
             string hitString = "";
             for (int i = 0; i < currentHP; i++) {
-                hitString += ". ";
+                hitString += ".";
             }
 
             hitPoints.text = hitString;
