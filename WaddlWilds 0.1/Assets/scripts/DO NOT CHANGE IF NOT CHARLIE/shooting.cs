@@ -11,7 +11,8 @@ public class shooting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && fireCoolDown <= 0)
         {
-            Instantiate(projectile);
+            GameObject fired = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 0),transform.rotation);
+            fired.transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
             fireCoolDown = fireRate;
         }
         fireCoolDown -= Time.deltaTime;
