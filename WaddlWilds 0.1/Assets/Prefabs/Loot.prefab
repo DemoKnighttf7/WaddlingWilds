@@ -173,5 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spread: 5
   pickdist: 5
-  pickTime: 1
-  player: {fileID: 0}
+  pickTime: 0.5

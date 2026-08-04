@@ -98,10 +98,12 @@ public class bullfrogAI : MonoBehaviour
             tounge.transform.position = transform.position;
         }
 
-        if(dist <= atkDist && player.transform.position.x - transform.position.x > 0) { //ROTATE TO FACE PLAYER
-            spriteRenderer.flipX = false; //CHANGE WHEN GET ACTUAL SPRITE
-        } else {
-            spriteRenderer.flipX = true;
+        if(isAttacking == false) {
+            if(dist <= atkDist && player.transform.position.x - transform.position.x > 0) { //ROTATE TO FACE PLAYER
+                spriteRenderer.flipX = true; //CHANGE WHEN GET ACTUAL SPRITE
+            } else {
+                spriteRenderer.flipX = false;
+            }
         }
 
         Vector3 toungeLoac = tounge.transform.position-transform.position;
@@ -118,5 +120,11 @@ public class bullfrogAI : MonoBehaviour
         latchable = false;
         latched = true;
         cam.GetComponent<CameraFollow>().shake(0.2f);
+    }
+
+    public void safeRetract() {
+        shotDir *= -1;
+        latchable = false;
+        tounge.GetComponent<ToungeLatch>().prep(false);
     }
 }
