@@ -8,7 +8,12 @@ public class Health : MonoBehaviour
 {
     public float MaxHP;
     public float currentHP;
-    public TMP_Text hitPoints;
+    private TMP_Text hitPoints;
+    public int lootBottomRange;
+    public int lootTopRange;
+
+    public GameObject loot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,13 @@ public class Health : MonoBehaviour
     public void Damage(float amt) {
         currentHP -= amt;
         if(currentHP <= 0) {
+            int lootAmt = Random.Range(lootBottomRange, lootTopRange);
+
+            for(int i = 0; i < lootAmt; i++) {
+                if(loot != null) {
+                    Instantiate(loot, transform.position, transform.rotation);
+                }
+            }
             Destroy(gameObject);
         }
     }

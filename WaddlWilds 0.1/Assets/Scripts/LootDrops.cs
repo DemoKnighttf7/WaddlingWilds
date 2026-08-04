@@ -11,7 +11,7 @@ public class LootDrops : MonoBehaviour
     public float pickTime = 3f;
     private Rigidbody2D rb;
 
-    public GameObject player;
+    private GameObject player;
 
     private float startTime;
     // Start is called before the first frame update
