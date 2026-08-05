@@ -13,12 +13,15 @@ public class Health : MonoBehaviour
     public int lootTopRange;
 
     public GameObject loot;
+    public GameObject onDamage;
+    public float baseTrans = 50f;
+    public float multiPerPer = 0.1f;
+    public float fadeCoeif = 0.05f;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHP = MaxHP;
-
         if(hitPoints == null) {
             hitPoints = transform.Find("Canvas/Hitpts").GetComponent<TMP_Text>();
         }
@@ -45,9 +48,18 @@ public class Health : MonoBehaviour
 
             hitPoints.text = hitString;
         }
+
+        onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif);
     }
     public void Damage(float amt) {
         currentHP -= amt;
+        if(onDamage != null) {
+            onDamage.SetActive(true);
+            float alpha = baseTrans *= (1 + multiPerPer * (MaxHP - currentHP)/MaxHP);
+            alpha = Mathf.Min(255, alpha);
+
+            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, alpha/255f);
+        }
         if(currentHP <= 0) {
             int lootAmt = Random.Range(lootBottomRange, lootTopRange);
 
