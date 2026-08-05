@@ -34,6 +34,9 @@ public class ratAI : MonoBehaviour
 
     private GameObject cam;
 
+    Animator anim;
+    private bool isWalking;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -46,6 +49,7 @@ public class ratAI : MonoBehaviour
         stunTime = Time.time;
 
         moveSpeed += Random.Range(-randomMoveSpeed, randomMoveSpeed);
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -55,6 +59,8 @@ public class ratAI : MonoBehaviour
         if(player != null) {
             dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
         }
+
+        isWalking = (rb.velocity.x == 0); // check
 
         if(dist <= atkDist || attacking == true) { //BEGIN ATTACKING
             if(Time.time - stunTime > stunAfterAttack) {
@@ -94,9 +100,11 @@ public class ratAI : MonoBehaviour
         }
 
         if(rb.velocity.x > 0) { //ROTATE TO FACE MOVE DIR
-            spriteRenderer.flipX = true;
-        } else {
             spriteRenderer.flipX = false;
+        } else {
+            spriteRenderer.flipX = true;
         }
+
+        anim.SetBool("Walking", isWalking);
     }
 }
