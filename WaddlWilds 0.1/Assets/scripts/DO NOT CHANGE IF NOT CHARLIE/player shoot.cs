@@ -9,6 +9,14 @@ public class playershoot : MonoBehaviour
     public float rotation;
     public GameObject player;
     public Vector3 offsetAmount;
+
+    //Flipping head horizontally intializing
+    private SpriteRenderer spriteRend;
+
+    void Awake() {
+        spriteRend = GetComponent<SpriteRenderer>();
+    }
+
     float findAngle()
     {
         float selfX = transform.position.x;
@@ -23,7 +31,11 @@ public class playershoot : MonoBehaviour
         }
         else if (mousePos.y < selfY)
         {
-            return 270 - (Mathf.Acos(goTo.x) * (180 / Mathf.PI));
+            if (mousePos.x > selfX) {
+                return -90f;
+            } else {
+                return 90f;
+            } //270 - (Mathf.Acos(goTo.x) * (180 / Mathf.PI)); -> REMOVED THIS SO PLAYER CANNOT LOOK DOWN (ANIMATION LOOKS WEIRD)
         }
         else if (mousePos.x == selfX && mousePos.y > selfY)
         {
@@ -53,14 +65,24 @@ public class playershoot : MonoBehaviour
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         if (player.GetComponent<playermovement>().state != "swimming")
         {
-            transform.position = player.transform.position + offsetAmount;
+            transform.position = player.transform.position + offsetAmount; 
             renderer.enabled = true;
         }
         else
         {
             renderer.enabled = false;
         }
-            rotation = findAngle();
+            rotation = findAngle() - 90f; // Rotation was off when adding duck head sprite
         transform.Rotate(0f, 0f, rotation - transform.eulerAngles.z, Space.Self);
+        print(rotation);
+
+        //FLIPPING PLAYER HEAD HORIZONTALLY
+        if (rotation > 90f || rotation < -90f) {
+            spriteRend.flipY = true;
+            offsetAmount = new Vector3(-0.055f, 0.375f, 0f);
+        } else {
+            spriteRend.flipY = false;
+            offsetAmount = new Vector3(-0.3f, 0.375f, 0f);
+        }
     }
 }
