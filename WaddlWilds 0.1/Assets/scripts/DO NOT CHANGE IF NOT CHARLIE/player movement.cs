@@ -23,10 +23,23 @@ public class playermovement : MonoBehaviour
 
     public float swimTurnSpeed;
     public float swimSpeed;
-    // Start is called before the first frame update
+    
+    Animator anim;
+    public bool isSwimming = false;
+    public bool isWalking = false;
+
+    //Animation initializing for flipping the body horizontally
+    private SpriteRenderer spriteRend;
+    public float offsetX;
+
+    void Awake() {
+        spriteRend = GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
         canDash = true;
+        anim = GetComponent<Animator>();
     }
     bool checkGrounded()
     {
@@ -113,6 +126,7 @@ public class playermovement : MonoBehaviour
 
     void LateUpdate()
     {
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
         bool grounded = checkGrounded();
@@ -122,6 +136,20 @@ public class playermovement : MonoBehaviour
         }
         checkState();
         if (state == "walking") {
+            //Animation control
+            if (xvelocity == 0) {
+                isWalking = false;
+            } else  {
+                isWalking = true;
+                if (xvelocity > 0) {
+                    spriteRend.flipX = true;
+                    offsetX = -0.5f;
+                } else {
+                    spriteRend.flipX = false;
+                    offsetX = 0f;
+                }
+            }
+
             float xAxis = Input.GetAxis("Horizontal");
             if (grounded || xvelocity*(Mathf.Abs(xAxis)/xAxis) < maxSpeed)
             {
@@ -145,6 +173,7 @@ public class playermovement : MonoBehaviour
         }
         else if (state == "dashing")
         {
+            isWalking = false;
             print("dashed");
             if (canDash)
             {
@@ -180,6 +209,8 @@ public class playermovement : MonoBehaviour
         }
         else if (state == "swimming")
         {
+            isWalking = false;
+            isSwimming = true;
             rb2d.velocity = new Vector2 (0, 0); 
             transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+swimmingDirection()*swimTurnSpeed*Time.deltaTime);
             transform.position = transform.position + new Vector3(Mathf.Cos((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), 0)*Time.deltaTime * swimSpeed;
@@ -188,10 +219,18 @@ public class playermovement : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
             rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            isSwimming = false;
         }
         else
         {
             rb2d.constraints = RigidbodyConstraints2D.None;
         }
+
+        //ANIMATION STUFF
+        //print(xvelocity);
+        anim.SetBool("Grounded", grounded);
+        anim.SetBool("Walking", isWalking);
+        anim.SetFloat("YVelocity", yvelocity);
+        anim.SetBool("Swimming", isSwimming);
     }
 }
