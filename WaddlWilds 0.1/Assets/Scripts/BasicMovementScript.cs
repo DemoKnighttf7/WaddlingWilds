@@ -14,6 +14,8 @@ public class BasicMovementScript : MonoBehaviour
 
     public GameObject loot;
 
+    public Canvas mainUI;
+
     public float seeds = 0f;
 
     // Start is called before the first frame update
@@ -47,6 +49,8 @@ public class BasicMovementScript : MonoBehaviour
             Vector3 newPos = collision.gameObject.transform.position;
             newPos.z = transform.position.z;
             transform.position = newPos;
+
+            mainUI.GetComponent<UIManagerForNonHealthThings>().fade(1, 1);
         }
     }
 }
