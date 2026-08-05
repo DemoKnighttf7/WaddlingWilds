@@ -103,7 +103,9 @@ public class bullfrogAI : MonoBehaviour
         if(latched) {
             if(Time.time - lastDamage > damageInterval) {
                 player.GetComponent<Health>().Damage(damage);
+                cam.GetComponent<CameraFollow>().shake(0.2f);
                 lastDamage = Time.time;
+                print(lastDamage);
             }
         }
 
@@ -131,7 +133,6 @@ public class bullfrogAI : MonoBehaviour
         toungeLineControl.SetPosition(0, toungeOffset);
 
         anim.SetBool("isAttacking", isAttacking);
-        //check
     }
 
     float getDist(Vector2 pos1, Vector2 pos2) {
