@@ -43,5 +43,10 @@ public class BasicMovementScript : MonoBehaviour
         if (collision.gameObject.CompareTag("CameraZone")) {
             cam.GetComponent<CameraFollow>().cameraZone = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag("Teleporter")) {
+            Vector3 newPos = collision.gameObject.transform.position;
+            newPos.z = transform.position.z;
+            transform.position = newPos;
+        }
     }
 }

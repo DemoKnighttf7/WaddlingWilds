@@ -37,6 +37,9 @@ public class ratAI : MonoBehaviour
     Animator anim;
     private bool isWalking;
 
+    public float knockback = 5f;
+    public float knockup = 1.5f;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -76,6 +79,12 @@ public class ratAI : MonoBehaviour
         if(dist < attackRange) {
             if(Time.time - lastAttack > attackInterval) { //ATTACK HERE
                 player.GetComponent<Health>().Damage(damage);
+
+                Vector2 playerDir = (player.transform.position - transform.position).normalized;
+
+                playerDir.y += knockup;
+
+                player.GetComponent<Rigidbody2D>().velocity = playerDir * knockback;
                 cam.GetComponent<CameraFollow>().shake(0.2f);
                 lastAttack = Time.time;
                 stunTime = Time.time;

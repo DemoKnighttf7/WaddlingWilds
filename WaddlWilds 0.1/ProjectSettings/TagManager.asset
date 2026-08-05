@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PlayerHead
   - player projectile
+  - Teleporter
   layers:
   - Default
   - TransparentFX

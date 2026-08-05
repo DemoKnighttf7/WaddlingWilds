@@ -439,7 +439,7 @@ MonoBehaviour:
   randomMoveSpeed: 1
   damage: 1
   attackInterval: 1
-  attackRange: 1.2
+  attackRange: 1.5
   stunAfterAttack: 1
   atkDist: 7
   forgetDist: 10
@@ -447,6 +447,7 @@ MonoBehaviour:
   idleMoveInterval: 3
   idleMoveChance: 0.5
   randomIdleStr: 1
+  knockback: 2
 --- !u!95 &6059648594009476461
 Animator:
   serializedVersion: 5
