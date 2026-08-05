@@ -24,7 +24,10 @@ public class SeedMaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
+        float dist = 999;
+        if(player != null) {
+            dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
+        }
 
         if (dist < pickDist) {
             if(seeds > 0) {
