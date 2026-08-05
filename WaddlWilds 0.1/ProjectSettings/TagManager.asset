@@ -8,6 +8,7 @@ TagManager:
   - CameraZone
   - Enemy
   - PlayerHead
+  - player projectile
   layers:
   - Default
   - TransparentFX

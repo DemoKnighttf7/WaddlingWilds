@@ -7,6 +7,8 @@ public class UIManagerForNonHealthThings : MonoBehaviour
 {
     public Image seedBar;
     private GameObject player;
+    private float seeds = 0f;
+    public Image seedUI;
 
     void Start()
     {
@@ -16,6 +18,17 @@ public class UIManagerForNonHealthThings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        seedBar.GetComponent<RectTransform>().offsetMax = new Vector2(-(937f - player.GetComponent<BasicMovementScript>().seeds * 22f), seedBar.GetComponent<RectTransform>().offsetMax.y);
+        float playerSeedCount = 0;
+        if(player != null) {
+            playerSeedCount = player.GetComponent<BasicMovementScript>().seeds;
+        }
+        if(playerSeedCount > seeds) {
+            for(int i = (int)seeds; i < playerSeedCount; i++) {
+                seeds++;
+                Instantiate(seedUI, seedBar.transform);
+            }
+        } else if (playerSeedCount < seeds) {
+            Destroy(seedBar.transform.GetChild(0));
+        }
     }
 }
