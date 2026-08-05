@@ -29,6 +29,10 @@ public class ToungeLatch : MonoBehaviour
             latched = collision.gameObject;
             //offset = latched.transform.position - offset;
         }
+        if(collision.gameObject.CompareTag("ground") && canLatch) {
+            canLatch = false;
+            frog.GetComponent<bullfrogAI>().safeRetract();
+        }
     }
 
     public void release() {

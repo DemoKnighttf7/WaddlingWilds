@@ -7,9 +7,13 @@ public class ratAI : MonoBehaviour
     private GameObject player;
 
     public float moveSpeed;
+    public float randomMoveSpeed = 1f;
     public float damage;
     public float attackInterval = 1f;
     public float attackRange = 1f;
+
+    public float stunAfterAttack = 1f;
+    private float stunTime;
 
     public float atkDist = 5f;
     public float forgetDist = 10f;
@@ -17,6 +21,7 @@ public class ratAI : MonoBehaviour
     public float idleMoveStr = 2f;
     public float idleMoveInterval = 1f;
     public float idleMoveChance = 0.5f;
+    public float randomIdleStr = 1f;
 
     private float lastIdleMove;
 
@@ -38,19 +43,28 @@ public class ratAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastIdleMove = Time.time;
         lastAttack = Time.time;
+        stunTime = Time.time;
+
+        moveSpeed += Random.Range(-randomMoveSpeed, randomMoveSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
+        float dist = 999;
+        if(player != null) {
+            dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
+        }
+
         if(dist <= atkDist || attacking == true) { //BEGIN ATTACKING
-            float dir = player.transform.position.x - transform.position.x;
-            dir /= Mathf.Abs(dir);
+            if(Time.time - stunTime > stunAfterAttack) {
+                float dir = player.transform.position.x - transform.position.x;
+                dir /= Mathf.Abs(dir);
 
-            attacking = true;
+                attacking = true;
 
-            rb.velocity = new Vector2(moveSpeed * dir, rb.velocity.y);
+                rb.velocity = new Vector2(moveSpeed * dir, rb.velocity.y);
+            }
         }
 
         if(dist < attackRange) {
@@ -58,6 +72,7 @@ public class ratAI : MonoBehaviour
                 player.GetComponent<Health>().Damage(damage);
                 cam.GetComponent<CameraFollow>().shake(0.2f);
                 lastAttack = Time.time;
+                stunTime = Time.time;
             }
         }
 
@@ -72,16 +87,16 @@ public class ratAI : MonoBehaviour
                     dir = -1f;
                     
                 }
-                rb.velocity = new Vector2(idleMoveStr * dir, rb.velocity.y);
+                rb.velocity = new Vector2((idleMoveStr + Random.Range(-randomIdleStr, randomIdleStr))* dir, rb.velocity.y);
                 lastIdleMove = Time.time;
             }
             
         }
 
         if(rb.velocity.x > 0) { //ROTATE TO FACE MOVE DIR
-            spriteRenderer.flipX = false;
-        } else {
             spriteRenderer.flipX = true;
+        } else {
+            spriteRenderer.flipX = false;
         }
     }
 }
