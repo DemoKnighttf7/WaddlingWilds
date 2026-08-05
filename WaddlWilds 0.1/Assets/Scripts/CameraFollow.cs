@@ -8,6 +8,8 @@ public class CameraFollow : MonoBehaviour
     public GameObject player;
     public GameObject cameraZone;
     public Vector3 velocity = new Vector3(0, 0, 0);
+
+    public float maxCamDist = 10f;
     
     void LateUpdate()
     {
@@ -18,6 +20,20 @@ public class CameraFollow : MonoBehaviour
             playerX = player.transform.position.x;
             playerY = player.transform.position.y;
         }
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        float mouseOffsetX = (mousePos.x + playerX)/2;
+        float mouseOffsetY = (mousePos.y + playerY)/2;
+
+        mouseOffsetX = Mathf.Min(mouseOffsetX, playerX + maxCamDist);
+        mouseOffsetY = Mathf.Min(mouseOffsetY, playerY + maxCamDist);
+
+        mouseOffsetX = Mathf.Max(mouseOffsetX, playerX - maxCamDist);
+        mouseOffsetY = Mathf.Max(mouseOffsetY, playerY - maxCamDist);
+        
+        playerX = mouseOffsetX;
+        playerY = mouseOffsetY;
 
         if (cameraZone != null) {
             BoxCollider2D bcd = cameraZone.GetComponent<BoxCollider2D>();
