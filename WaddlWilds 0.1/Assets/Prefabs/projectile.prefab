@@ -104,6 +104,8 @@ MonoBehaviour:
   damage: 1
   friendly:
   - Player
+  - PlayerHead
+  - player projectile
   target:
   - Enemy
 --- !u!50 &-8869249297599883328
