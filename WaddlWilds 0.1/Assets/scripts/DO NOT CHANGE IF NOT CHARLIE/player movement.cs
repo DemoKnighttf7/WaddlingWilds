@@ -57,13 +57,23 @@ public class playermovement : MonoBehaviour
         float swimDir = 0;
         if (Input.GetAxis("Horizontal") != 0)
         {
+            if (transform.eulerAngles.z > 180)
+            {
+                transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z - 360);
+            }
             if (transform.eulerAngles.z > -90 && transform.eulerAngles.z < 90)
             {
-                swimDir = (Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
+                print("1 "+ transform.eulerAngles.z.ToString());
+                swimDir = -(Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
             }
             else if (transform.eulerAngles.z != 90 && transform.eulerAngles.z != -90)
             {
-                swimDir = -(Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
+                print("2 "+ transform.eulerAngles.z.ToString());
+                swimDir = Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                print("3 " + transform.eulerAngles.z.ToString());
             }
         }
         if (Input.GetAxis("Vertical") != 0)
