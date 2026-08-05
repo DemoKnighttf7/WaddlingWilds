@@ -37,12 +37,18 @@ public class bullfrogAI : MonoBehaviour
 
     private GameObject cam;
 
+    public Vector3 toungeOffset = new Vector3(1f, 1f, 0f);
+
+    private float dir = -1f;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         tounge = transform.Find("ToungeAttack").gameObject;
         toungeLine = transform.Find("Tounge").gameObject;
         cam = GameObject.FindWithTag("MainCamera");
+
+        toungeLine.SetActive(false);
 
         toungeLineControl = toungeLine.GetComponent<LineRenderer>();
         toungeLineControl.positionCount = 2;
@@ -73,7 +79,7 @@ public class bullfrogAI : MonoBehaviour
         }
 
         if (isAttacking) {
-            print(toungeDist);
+            toungeLine.SetActive(true);
             tounge.transform.position = new Vector3(tounge.transform.position.x + shotDir.x * shotSpeed * Time.deltaTime, tounge.transform.position.y + shotDir.y * shotSpeed * Time.deltaTime, tounge.transform.position.z);
             if(toungeDist >= atkDist && latchable == true) {
                 shotDir *= -1;
@@ -103,18 +109,26 @@ public class bullfrogAI : MonoBehaviour
 
         if (isAttacking == false) {
             tounge.transform.position = transform.position;
+            toungeLine.SetActive(false);
         }
+        
 
         if(isAttacking == false) {
             if(dist <= atkDist && player.transform.position.x - transform.position.x > 0) { //ROTATE TO FACE PLAYER
                 spriteRenderer.flipX = true; //CHANGE WHEN GET ACTUAL SPRITE
+                dir = 1;
             } else {
                 spriteRenderer.flipX = false;
+                dir = -1;
             }
         }
 
         Vector3 toungeLoac = tounge.transform.position-transform.position;
         toungeLineControl.SetPosition(1, toungeLoac);
+
+        toungeOffset.x = Mathf.Abs(toungeOffset.x) * dir;
+
+        toungeLineControl.SetPosition(0, toungeOffset);
 
         anim.SetBool("isAttacking", isAttacking);
         //check
