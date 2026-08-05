@@ -223,6 +223,7 @@ MonoBehaviour:
   rotation: 0
   player: {fileID: 381147912}
   offsetAmount: {x: 0, y: 0.7, z: 0}
+  bodyOffsetAmount: 0
 --- !u!114 &353135663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +290,9 @@ MonoBehaviour:
     m_Bits: 8
   swimTurnSpeed: 200
   swimSpeed: 5
+  isSwimming: 0
+  isWalking: 0
+  offsetX: 0
 --- !u!50 &381147914
 Rigidbody2D:
   serializedVersion: 4

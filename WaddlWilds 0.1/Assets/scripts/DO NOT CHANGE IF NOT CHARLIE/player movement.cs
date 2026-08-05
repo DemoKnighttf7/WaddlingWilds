@@ -74,32 +74,31 @@ public class playermovement : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z - 360);
             }
-            if (transform.eulerAngles.z > -90 && transform.eulerAngles.z < 90)
+
+            if ((transform.eulerAngles.z > -90 && transform.eulerAngles.z < 90) || (transform.eulerAngles.z > 270 && transform.eulerAngles.z < 450))
             {
-                print("1 "+ transform.eulerAngles.z.ToString());
                 swimDir = -(Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
             }
-            else if (transform.eulerAngles.z != 90 && transform.eulerAngles.z != -90)
+            else if (Mathf.Round(transform.eulerAngles.z) != 90 && Mathf.Round(transform.eulerAngles.z) != -90 && Mathf.Round(transform.eulerAngles.z) != 270 && Mathf.Round(transform.eulerAngles.z) != 450 && Mathf.Round(transform.eulerAngles.z) != 91 && Mathf.Round(transform.eulerAngles.z) != -89 && Mathf.Round(transform.eulerAngles.z) != 271 && Mathf.Round(transform.eulerAngles.z) != 451)
             {
-                print("2 "+ transform.eulerAngles.z.ToString());
                 swimDir = Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal");
             }
-            else
-            {
-                print("3 " + transform.eulerAngles.z.ToString());
-            }
-        }
+         }
+
         if (Input.GetAxis("Vertical") != 0)
         {
-            if (transform.eulerAngles.z < 0 && transform.eulerAngles.z > 180)
+            if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180)
             {
-                swimDir += Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
-            }
-            else if (transform.eulerAngles.z != 0 && transform.eulerAngles.z != 180)
-            {
+                print("1 "+transform.eulerAngles.z.ToString());
                 swimDir -= Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
             }
+            else if (Mathf.Round(transform.eulerAngles.z) != 0 && Mathf.Round(transform.eulerAngles.z) != 180)
+            {
+                swimDir += Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
+                print("2 " + transform.eulerAngles.z.ToString());
+            }
         }
+        print(swimDir);
         if (swimDir != 0)
         {
             swimDir = Mathf.Abs(swimDir) / swimDir;

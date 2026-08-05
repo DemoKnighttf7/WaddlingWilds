@@ -36,5 +36,6 @@ public class water : MonoBehaviour
         collision.gameObject.GetComponent<playermovement>().checkState("walking");
         collision.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z + 90) * Mathf.Deg2Rad))*exitSpeed;
         collision.transform.eulerAngles = new Vector3(0, 0, 0);
+        collision.GetComponent<playermovement>().canDash = true;
     }
 }
