@@ -54,7 +54,10 @@ public class bullfrogAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = getDist((Vector2)player.transform.position, (Vector2)transform.position);
+        float dist = 999;
+        if(player != null) {
+            dist = getDist((Vector2)player.transform.position, (Vector2)transform.position);
+        }
         float toungeDist = getDist((Vector2)tounge.transform.position, (Vector2)transform.position);
         if(dist <= atkDist && Time.time - lastAttack > attackInterval && isAttacking == false) { //BEGIN ATTACKING (SHOOT PROJ)
             isAttacking = true;
@@ -126,5 +129,6 @@ public class bullfrogAI : MonoBehaviour
         shotDir *= -1;
         latchable = false;
         tounge.GetComponent<ToungeLatch>().prep(false);
+        tounge.GetComponent<ToungeLatch>().release();
     }
 }

@@ -14,6 +14,8 @@ public class BasicMovementScript : MonoBehaviour
 
     public GameObject loot;
 
+    public float seeds = 0f;
+
     // Start is called before the first frame update
     void Start()
     {

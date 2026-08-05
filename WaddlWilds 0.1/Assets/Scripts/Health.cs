@@ -48,8 +48,9 @@ public class Health : MonoBehaviour
 
             hitPoints.text = hitString;
         }
-
-        onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif);
+        if(onDamage != null) {
+            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif);
+        }
     }
     public void Damage(float amt) {
         currentHP -= amt;
