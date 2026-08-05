@@ -23,6 +23,8 @@ public class LootDrops : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         //Physics.IgnoreCollision(GetComponent<Collider>(), player.GetComponent<Collider>());
+
+        transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-180f, 180f));
     }
 
     // Update is called once per frame
