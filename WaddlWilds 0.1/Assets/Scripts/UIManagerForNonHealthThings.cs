@@ -28,7 +28,8 @@ public class UIManagerForNonHealthThings : MonoBehaviour
                 Instantiate(seedUI, seedBar.transform);
             }
         } else if (playerSeedCount < seeds) {
-            Destroy(seedBar.transform.GetChild(0));
+            Destroy(seedBar.transform.GetChild(0).gameObject);
+            seeds--;
         }
     }
 }
