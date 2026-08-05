@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class bullfrogAI : MonoBehaviour
 {
+    Animator anim;
+    
     private GameObject player;
 
     public float damage = 1f;
@@ -49,6 +51,8 @@ public class bullfrogAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastAttack = Time.time;
         lastDamage = Time.time;
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -111,6 +115,9 @@ public class bullfrogAI : MonoBehaviour
 
         Vector3 toungeLoac = tounge.transform.position-transform.position;
         toungeLineControl.SetPosition(1, toungeLoac);
+
+        anim.SetBool("isAttacking", isAttacking);
+        //check
     }
 
     float getDist(Vector2 pos1, Vector2 pos2) {
