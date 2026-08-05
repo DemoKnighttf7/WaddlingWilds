@@ -98,7 +98,7 @@ public class playermovement : MonoBehaviour
                 print("2 " + transform.eulerAngles.z.ToString());
             }
         }
-        print(swimDir);
+        print(swimDir); 
         if (swimDir != 0)
         {
             swimDir = Mathf.Abs(swimDir) / swimDir;
