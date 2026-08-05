@@ -18,11 +18,13 @@ public class Health : MonoBehaviour
     public float multiPerPer = 0.1f;
     public float fadeCoeif = 0.05f;
 
+    public bool doHitpts = true;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHP = MaxHP;
-        if(hitPoints == null) {
+        if(hitPoints == null && doHitpts) {
             hitPoints = transform.Find("Canvas/Hitpts").GetComponent<TMP_Text>();
         }
 
@@ -54,6 +56,7 @@ public class Health : MonoBehaviour
     }
     public void Damage(float amt) {
         currentHP -= amt;
+        print(currentHP);
         if(onDamage != null) {
             onDamage.SetActive(true);
             float alpha = baseTrans *= (1 + multiPerPer * (MaxHP - currentHP)/MaxHP);
@@ -70,7 +73,9 @@ public class Health : MonoBehaviour
                 }
             }
 
-            hitPoints.text = "";
+            if(hitPoints != null) {
+                hitPoints.text = "";
+            }
             Destroy(gameObject);
         }
     }

@@ -10,6 +10,11 @@ public class UIManagerForNonHealthThings : MonoBehaviour
     private float seeds = 0f;
     public Image seedUI;
 
+    public Image healthBar;
+    public Image healthMask;
+
+    public float masks = 0f;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -19,8 +24,10 @@ public class UIManagerForNonHealthThings : MonoBehaviour
     void Update()
     {
         float playerSeedCount = 0;
+        float playerMaskCount = 0;
         if(player != null) {
             playerSeedCount = player.GetComponent<BasicMovementScript>().seeds;
+            playerMaskCount = player.GetComponent<Health>().currentHP;
         }
         if(playerSeedCount > seeds) {
             for(int i = (int)seeds; i < playerSeedCount; i++) {
@@ -30,6 +37,16 @@ public class UIManagerForNonHealthThings : MonoBehaviour
         } else if (playerSeedCount < seeds) {
             Destroy(seedBar.transform.GetChild(0).gameObject);
             seeds--;
+        }
+
+        if(playerMaskCount > masks) {
+            for(int i = (int)masks; i < playerMaskCount; i++) {
+                masks++;
+                Instantiate(healthMask, healthBar.transform);
+            }
+        } else if (playerMaskCount < masks) {
+            Destroy(healthBar.transform.GetChild(0).gameObject);
+            masks--;
         }
     }
 }
