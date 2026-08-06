@@ -18,10 +18,10 @@ public class VineSnap : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        print("Collided!");
+    private void OnTriggerEnter2D(Collider2D collision) {
 
-        if (collision.gameObject.CompareTag("Player")) {
+        if (collision.gameObject.CompareTag("player projectile")) {
+            print("Collided!");
             rb = platform.GetComponent<Rigidbody2D>();
             rb.gravityScale = 1f;
             rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
