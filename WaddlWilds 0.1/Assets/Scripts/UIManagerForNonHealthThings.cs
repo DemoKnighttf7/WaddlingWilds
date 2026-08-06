@@ -35,7 +35,7 @@ public class UIManagerForNonHealthThings : MonoBehaviour
         float playerSeedCount = 0;
         float playerMaskCount = 0;
         if(player != null) {
-            playerSeedCount = player.GetComponent<BasicMovementScript>().seeds;
+            playerSeedCount = player.GetComponent<playermovement>().seeds;
             playerMaskCount = player.GetComponent<Health>().currentHP;
         }
         if(playerSeedCount > seeds) {
@@ -61,22 +61,22 @@ public class UIManagerForNonHealthThings : MonoBehaviour
         if(blackFade) {
             float alpha = transFade.GetComponent<Image>().color.a;
 
-            alpha += 255f/blackFaceLen * Time.deltaTime;
+            alpha += 1f/blackFaceLen * Time.deltaTime;
 
-            alpha = Mathf.Min(alpha, 255f);
+            alpha = Mathf.Min(alpha, 1f);
 
-            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha/255f);
-            if(alpha == 255f) {
+            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha);
+            if(alpha == 1f) {
                 blackFade = false;
                 fadeEnd = Time.time;
             }
         } else if(Time.time - fadeEnd > blackFadeWait) {
             float alpha = transFade.GetComponent<Image>().color.a;
 
-            alpha -= 255f/blackFaceLen * Time.deltaTime;
+            alpha -= 1f/blackFaceLen * Time.deltaTime;
 
             alpha = Mathf.Max(alpha, 0f);
-            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha/255f);
+            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha);
         }
     }
 

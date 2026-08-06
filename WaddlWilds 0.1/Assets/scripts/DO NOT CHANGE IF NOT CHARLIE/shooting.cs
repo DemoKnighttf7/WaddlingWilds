@@ -10,7 +10,7 @@ public class shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && fireCoolDown <= 0 && player.GetComponent<playermovement>().state != "swimming")
+        if (Input.GetMouseButtonDown(0) && fireCoolDown <= 0 && player.GetComponent<playermovement>().state != "swimming" && player.GetComponent<playermovement>().seeds > 0)
         {
             Vector3 mouseScreenPos = Input.mousePosition;
             mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z); 
@@ -25,6 +25,8 @@ public class shooting : MonoBehaviour
             GameObject fired = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 0), lookRotation);
             fired.transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+90);
             fireCoolDown = fireRate;
+
+            player.GetComponent<playermovement>().seeds -= 1;
         }
         fireCoolDown -= Time.deltaTime;
     }

@@ -32,6 +32,12 @@ public class playermovement : MonoBehaviour
     private SpriteRenderer spriteRend;
     public float offsetX;
 
+    //ADDED BY JAKE:
+    private GameObject cam;
+    private Canvas mainUI;
+
+    public float seeds = 0f;
+
     void Awake() {
         spriteRend = GetComponent<SpriteRenderer>();
     }
@@ -40,6 +46,10 @@ public class playermovement : MonoBehaviour
     {
         canDash = true;
         anim = GetComponent<Animator>();
+
+        //ADDED BY JAKE:
+        cam = GameObject.FindWithTag("MainCamera");
+        mainUI = GameObject.FindWithTag("MainUI").GetComponent<Canvas>();
     }
     bool checkGrounded()
     {
@@ -231,5 +241,22 @@ public class playermovement : MonoBehaviour
         anim.SetBool("Walking", isWalking);
         anim.SetFloat("YVelocity", yvelocity);
         anim.SetBool("Swimming", isSwimming);
+    }
+
+
+    //ADDED BY JAKE
+
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("CameraZone")) {
+            cam.GetComponent<CameraFollow>().cameraZone = collision.gameObject;
+        }
+        if (collision.gameObject.CompareTag("Teleporter")) {
+            Vector3 newPos = collision.gameObject.transform.position;
+            newPos.z = transform.position.z;
+            transform.position = newPos;
+
+            mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 1f);
+        }
     }
 }

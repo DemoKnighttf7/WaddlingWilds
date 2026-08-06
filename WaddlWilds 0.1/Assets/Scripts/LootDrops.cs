@@ -47,7 +47,7 @@ public class LootDrops : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player") && pickable == true) {
-            player.GetComponent<BasicMovementScript>().seeds += 1;
+            player.GetComponent<playermovement>().seeds += 1;
             Destroy(gameObject);
         }
     }

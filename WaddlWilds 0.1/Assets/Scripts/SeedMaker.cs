@@ -11,12 +11,12 @@ public class SeedMaker : MonoBehaviour
     private GameObject player;
     public GameObject loot;
 
-    private GameObject pressF;
+    private GameObject pressQ;
 
     void Start()
     {
-        pressF = transform.Find("Canvas").gameObject;
-        pressF.SetActive(false);
+        pressQ = transform.Find("Canvas").gameObject;
+        pressQ.SetActive(false);
         seeds += Random.Range(-randomizer, randomizer+1);
         player = GameObject.FindWithTag("Player");
     }
@@ -31,18 +31,18 @@ public class SeedMaker : MonoBehaviour
 
         if (dist < pickDist) {
             if(seeds > 0) {
-                pressF.SetActive(true);
+                pressQ.SetActive(true);
             } else {
-                pressF.SetActive(false);
+                pressQ.SetActive(false);
             }
-            if (Input.GetKeyDown(KeyCode.F) && seeds > 0) {
+            if (Input.GetKeyDown(KeyCode.Q) && seeds > 0) {
                 for(int i = 0; i < seeds; i++) {
                     Instantiate(loot, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
                 }
                 seeds = 0;
             }
         } else {
-            pressF.SetActive(false);
+            pressQ.SetActive(false);
         }
     }
 }
