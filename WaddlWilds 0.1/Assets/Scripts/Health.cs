@@ -18,11 +18,13 @@ public class Health : MonoBehaviour
     public float multiPerPer = 0.1f;
     public float fadeCoeif = 0.05f;
 
+    public bool doHitpts = true;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHP = MaxHP;
-        if(hitPoints == null) {
+        if(hitPoints == null && doHitpts) {
             hitPoints = transform.Find("Canvas/Hitpts").GetComponent<TMP_Text>();
         }
 
@@ -34,6 +36,10 @@ public class Health : MonoBehaviour
         
         if(hitPoints != null) {
             hitPoints.text = hitString;
+        }
+
+        if(onDamage != null) {
+            onDamage.SetActive(true);
         }
     }
 
@@ -49,13 +55,13 @@ public class Health : MonoBehaviour
             hitPoints.text = hitString;
         }
         if(onDamage != null) {
-            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif);
+            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif * Time.deltaTime);
         }
     }
     public void Damage(float amt) {
         currentHP -= amt;
+        print(currentHP);
         if(onDamage != null) {
-            onDamage.SetActive(true);
             float alpha = baseTrans *= (1 + multiPerPer * (MaxHP - currentHP)/MaxHP);
             alpha = Mathf.Min(255, alpha);
 
@@ -70,7 +76,9 @@ public class Health : MonoBehaviour
                 }
             }
 
-            hitPoints.text = "";
+            if(hitPoints != null) {
+                hitPoints.text = "";
+            }
             Destroy(gameObject);
         }
     }

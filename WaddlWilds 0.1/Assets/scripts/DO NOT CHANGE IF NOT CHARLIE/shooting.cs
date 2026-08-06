@@ -12,9 +12,18 @@ public class shooting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && fireCoolDown <= 0 && player.GetComponent<playermovement>().state != "swimming")
         {
-            Quaternion offsetRotation = transform.rotation * Quaternion.Euler(0, 0, -90);
-            GameObject fired = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 0), offsetRotation);
-            fired.transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+            Vector3 mouseScreenPos = Input.mousePosition;
+            mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z); 
+
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+        
+            mouseWorldPos.z = 0f;
+            Vector3 shootDir = (mouseWorldPos - transform.position).normalized;
+
+            Quaternion lookRotation = Quaternion.LookRotation(Vector3.forward, shootDir);
+
+            GameObject fired = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 0), lookRotation);
+            fired.transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+90);
             fireCoolDown = fireRate;
         }
         fireCoolDown -= Time.deltaTime;

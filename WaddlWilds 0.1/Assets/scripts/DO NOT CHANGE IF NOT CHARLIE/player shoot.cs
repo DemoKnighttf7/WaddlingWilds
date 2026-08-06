@@ -32,11 +32,12 @@ public class playershoot : MonoBehaviour
         }
         else if (mousePos.y < selfY)
         {
-            if (mousePos.x > selfX) {
-                return -90f;
-            } else {
-                return 90f;
-            } //270 - (Mathf.Acos(goTo.x) * (180 / Mathf.PI)); -> REMOVED THIS SO PLAYER CANNOT LOOK DOWN (ANIMATION LOOKS WEIRD)
+            return 270 - (Mathf.Acos(goTo.x) * (180 / Mathf.PI));
+            // if (mousePos.x > selfX) {
+            //     return -90f;
+            // } else {
+            //     return 90f;
+            // } //270 - (Mathf.Acos(goTo.x) * (180 / Mathf.PI)); -> REMOVED THIS SO PLAYER CANNOT LOOK DOWN (ANIMATION LOOKS WEIRD)
         }
         else if (mousePos.x == selfX && mousePos.y > selfY)
         {
