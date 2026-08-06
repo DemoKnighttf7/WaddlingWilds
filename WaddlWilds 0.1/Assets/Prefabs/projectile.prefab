@@ -106,6 +106,8 @@ MonoBehaviour:
   - Player
   - PlayerHead
   - player projectile
+  - CameraZone
+  - Teleporter
   target:
   - Enemy
 --- !u!50 &-8869249297599883328

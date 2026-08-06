@@ -10,6 +10,8 @@ TagManager:
   - PlayerHead
   - player projectile
   - Teleporter
+  - Door
+  - MainUI
   layers:
   - Default
   - TransparentFX

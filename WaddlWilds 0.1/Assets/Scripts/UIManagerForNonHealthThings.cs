@@ -35,7 +35,7 @@ public class UIManagerForNonHealthThings : MonoBehaviour
         float playerSeedCount = 0;
         float playerMaskCount = 0;
         if(player != null) {
-            playerSeedCount = player.GetComponent<BasicMovementScript>().seeds;
+            playerSeedCount = player.GetComponent<playermovement>().seeds;
             playerMaskCount = player.GetComponent<Health>().currentHP;
         }
         if(playerSeedCount > seeds) {

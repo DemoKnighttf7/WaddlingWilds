@@ -108,9 +108,9 @@ public class ratAI : MonoBehaviour
             
         }
 
-        if(rb.velocity.x > 0) { //ROTATE TO FACE MOVE DIR
+        if(rb.velocity.x > 0.05f) { //ROTATE TO FACE MOVE DIR
             spriteRenderer.flipX = false;
-        } else {
+        } else if (rb.velocity.x < 0.05f) {
             spriteRenderer.flipX = true;
         }
 
