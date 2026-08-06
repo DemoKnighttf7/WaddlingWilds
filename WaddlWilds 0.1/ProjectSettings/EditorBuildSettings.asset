@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JakeTestScene.unity
     guid: 45ccbcee49b4b4faf9258817cc0d7d9b
+  - enabled: 1
+    path: Assets/Scenes/LevelScene.unity
+    guid: a8f80ae11a4f647e9ab0f44e8b9cddd2
   m_configObjects: {}

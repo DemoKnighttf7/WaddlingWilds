@@ -20,6 +20,6 @@ public class MainMenu : MonoBehaviour
     }
     
     public void StartGameButton() {
-        SceneManager.LoadScene("JakeTestScene");
+        SceneManager.LoadScene("LevelScene");
     }
 }
