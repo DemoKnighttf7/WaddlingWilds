@@ -50,7 +50,7 @@ public class BasicMovementScript : MonoBehaviour
             newPos.z = transform.position.z;
             transform.position = newPos;
 
-            mainUI.GetComponent<UIManagerForNonHealthThings>().fade(1, 1);
+            mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 0.3f);
         }
     }
 }
