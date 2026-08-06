@@ -80,7 +80,7 @@ public class bullfrogAI : MonoBehaviour
 
         if (isAttacking) {
             toungeLine.SetActive(true);
-            tounge.GetComponent<Rigidbody2D>().MovePosition(new Vector3(tounge.transform.position.x + shotDir.x * shotSpeed * Time.deltaTime, tounge.transform.position.y + shotDir.y * shotSpeed * Time.deltaTime, tounge.transform.position.z));
+            tounge.transform.position = new Vector3(tounge.transform.position.x + shotDir.x * shotSpeed * Time.deltaTime, tounge.transform.position.y + shotDir.y * shotSpeed * Time.deltaTime, tounge.transform.position.z);
             if(toungeDist >= atkDist && latchable == true) {
                 shotDir *= -1;
                 latchable = false;
