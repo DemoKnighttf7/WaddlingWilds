@@ -19,13 +19,18 @@ public class Button : MonoBehaviour
     private Vector3 targetPosition;
 
     public bool isHorizontal;
+    public bool flipped;
     // Start is called before the first frame update
 
     void Start()
     {
         door = gameObject.transform.GetChild(0).gameObject;
         if (isHorizontal) {
-            targetPosition = door.transform.position + (Vector3.left * slideDistance);    
+            if (flipped) {
+                targetPosition = door.transform.position + (Vector3.left * slideDistance); 
+            } else {
+                targetPosition = door.transform.position + (Vector3.right * slideDistance); 
+            }
         } else {
             targetPosition = door.transform.position + (Vector3.down * slideDistance);
         }

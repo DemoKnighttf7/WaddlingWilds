@@ -174,7 +174,7 @@ public class playermovement : MonoBehaviour
                 xvelocity = maxSpeed * Mathf.Abs(xvelocity) / xvelocity;
             }
                 
-            if (grounded && Input.GetKeyDown(KeyCode.Space))
+            if (grounded && Input.GetKeyDown(KeyCode.W))
             {
                 yvelocity = jumpSpeed;
             }

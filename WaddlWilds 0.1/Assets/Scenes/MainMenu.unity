@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 100
+  parallaxMultiplier: 1
   smoothTime: 0.3
 --- !u!114 &81740015
 MonoBehaviour:
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 50
+  parallaxMultiplier: 0.5
   smoothTime: 0.3
 --- !u!114 &94284992
 MonoBehaviour:
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 40
+  parallaxMultiplier: 0.4
   smoothTime: 0.3
 --- !u!1 &230773368
 GameObject:
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 60
+  parallaxMultiplier: 0.6
   smoothTime: 0.3
 --- !u!114 &243464487
 MonoBehaviour:
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 100
+  parallaxMultiplier: 1
   smoothTime: 0.3
 --- !u!114 &335558573
 MonoBehaviour:
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 30
+  parallaxMultiplier: 0.3
   smoothTime: 0.3
 --- !u!114 &620884229
 MonoBehaviour:
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 50
+  parallaxMultiplier: 0.5
   smoothTime: 0.3
 --- !u!114 &744691631
 MonoBehaviour:
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1b615dc12445544a2c5fdfe0944ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 50
+  parallaxMultiplier: 0.5
   smoothTime: 0.3
 --- !u!114 &1208932401
 MonoBehaviour:
