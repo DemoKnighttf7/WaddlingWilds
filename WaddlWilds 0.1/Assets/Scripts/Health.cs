@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
 
     public bool doHitpts = true;
 
+    public GameObject deathEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,10 @@ public class Health : MonoBehaviour
 
             if(hitPoints != null) {
                 hitPoints.text = "";
+            }
+
+            if(deathEffect != null) {
+                Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
             }
             Destroy(gameObject);
         }

@@ -421,6 +421,7 @@ MonoBehaviour:
   multiPerPer: 0.1
   fadeCoeif: 0.05
   doHitpts: 1
+  deathEffect: {fileID: 3794499898769131472, guid: 6aee4859b58354bca84f602a93141466, type: 3}
 --- !u!114 &2148894032961137741
 MonoBehaviour:
   m_ObjectHideFlags: 0

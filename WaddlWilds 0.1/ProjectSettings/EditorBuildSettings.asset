@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Movement test scene ONLY HAVE CHARLIE WORK ON THIS.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/MainMenu(Jake).unity
+    path: Assets/Scenes/MainMenu.unity
     guid: b10de8e01e14b4282a6f0a5608856715
   - enabled: 1
     path: Assets/Scenes/JakeTestScene.unity
