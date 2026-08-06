@@ -174,7 +174,7 @@ public class playermovement : MonoBehaviour
                 xvelocity = maxSpeed * Mathf.Abs(xvelocity) / xvelocity;
             }
                 
-            if (grounded && Input.GetKeyDown(KeyCode.W))
+            if (grounded && (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.Space)))
             {
                 yvelocity = jumpSpeed;
             }
@@ -257,6 +257,9 @@ public class playermovement : MonoBehaviour
             transform.position = newPos;
 
             mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 1f);
+        }
+        if (collision.gameObject.CompareTag("DIE")) {
+            GetComponent<Health>().Damage(99999);
         }
     }
 }
