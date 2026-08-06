@@ -27,6 +27,10 @@ public class Checkpoint : MonoBehaviour
             dist = Mathf.Pow(Mathf.Pow(Mathf.Abs(player.transform.position.x-transform.position.x), 2f) + Mathf.Pow(Mathf.Abs(player.transform.position.y-transform.position.y), 2f), 0.5f);
         }
 
+        if(player.GetComponent<Health>().checkpoint != gameObject) {
+            curPoint = false;
+        }
+
         if (dist < useDist) {
             if(curPoint == false) {
                 pressE.SetActive(true);
@@ -35,6 +39,7 @@ public class Checkpoint : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E) && curPoint == false) {
                 player.GetComponent<Health>().checkpoint = gameObject;
+                curPoint = true;
             }
         } else {
             pressE.SetActive(false);
