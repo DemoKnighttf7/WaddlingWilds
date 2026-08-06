@@ -37,6 +37,10 @@ public class Health : MonoBehaviour
         if(hitPoints != null) {
             hitPoints.text = hitString;
         }
+
+        if(onDamage != null) {
+            onDamage.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -51,14 +55,13 @@ public class Health : MonoBehaviour
             hitPoints.text = hitString;
         }
         if(onDamage != null) {
-            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif);
+            onDamage.GetComponent<Image>().color = new Color(1f, 1f, 1f, onDamage.GetComponent<Image>().color.a - onDamage.GetComponent<Image>().color.a * fadeCoeif * Time.deltaTime);
         }
     }
     public void Damage(float amt) {
         currentHP -= amt;
         print(currentHP);
         if(onDamage != null) {
-            onDamage.SetActive(true);
             float alpha = baseTrans *= (1 + multiPerPer * (MaxHP - currentHP)/MaxHP);
             alpha = Mathf.Min(255, alpha);
 

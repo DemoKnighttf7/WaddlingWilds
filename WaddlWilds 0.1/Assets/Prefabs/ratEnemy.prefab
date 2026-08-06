@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 8542712185243900880}
   - component: {fileID: 3485295366561893996}
   - component: {fileID: 2148894032961137741}
+  - component: {fileID: 6059648594009476461}
   m_Layer: 8
   m_Name: ratEnemy
   m_TagString: Untagged
@@ -269,7 +270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.46, y: -1.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8882358166109362705}
@@ -316,7 +317,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1626388666, guid: 7fad780cad09c974380827555dad9120, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -386,18 +387,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0039679557, y: -0.0013673604}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.48, y: 0.17}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.49507406, y: 0.18078956}
   m_EdgeRadius: 0
 --- !u!114 &3485295366561893996
 MonoBehaviour:
@@ -421,6 +422,7 @@ MonoBehaviour:
   baseTrans: 50
   multiPerPer: 0.1
   fadeCoeif: 0.05
+  doHitpts: 1
 --- !u!114 &2148894032961137741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +439,7 @@ MonoBehaviour:
   randomMoveSpeed: 1
   damage: 1
   attackInterval: 1
-  attackRange: 1.2
+  attackRange: 1.5
   stunAfterAttack: 1
   atkDist: 7
   forgetDist: 10
@@ -445,3 +447,25 @@ MonoBehaviour:
   idleMoveInterval: 3
   idleMoveChance: 0.5
   randomIdleStr: 1
+  knockback: 2
+--- !u!95 &6059648594009476461
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3921287766332552268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7679368179323f4d8ddf55fc615d489, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

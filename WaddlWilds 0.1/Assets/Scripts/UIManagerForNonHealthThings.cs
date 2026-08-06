@@ -13,7 +13,16 @@ public class UIManagerForNonHealthThings : MonoBehaviour
     public Image healthBar;
     public Image healthMask;
 
+    public Image transFade;
+
     public float masks = 0f;
+
+    private float blackFaceLen = 0f;
+    private float blackFadeWait = 0f;
+
+    private bool blackFade = false;
+
+    private float fadeEnd = 0f;
 
     void Start()
     {
@@ -48,5 +57,33 @@ public class UIManagerForNonHealthThings : MonoBehaviour
             Destroy(healthBar.transform.GetChild(0).gameObject);
             masks--;
         }
+
+        if(blackFade) {
+            float alpha = transFade.GetComponent<Image>().color.a;
+
+            alpha += 1f/blackFaceLen * Time.deltaTime;
+
+            alpha = Mathf.Min(alpha, 1f);
+
+            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha);
+            if(alpha == 1f) {
+                blackFade = false;
+                fadeEnd = Time.time;
+            }
+        } else if(Time.time - fadeEnd > blackFadeWait) {
+            float alpha = transFade.GetComponent<Image>().color.a;
+
+            alpha -= 1f/blackFaceLen * Time.deltaTime;
+
+            alpha = Mathf.Max(alpha, 0f);
+            transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, alpha);
+        }
+    }
+
+    public void fade(float fadeDuration, float waitDuration) {
+        blackFaceLen = fadeDuration;
+        blackFadeWait = waitDuration;
+        blackFade = true;
+        transFade.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
     }
 }

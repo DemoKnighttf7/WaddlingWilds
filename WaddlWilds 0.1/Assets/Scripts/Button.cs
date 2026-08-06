@@ -17,12 +17,18 @@ public class Button : MonoBehaviour
 
     private bool sliding = false;
     private Vector3 targetPosition;
+
+    public bool isHorizontal;
     // Start is called before the first frame update
 
     void Start()
     {
-        door = GameObject.FindWithTag("Door");
-        targetPosition = door.transform.position + (Vector3.down * slideDistance);
+        door = gameObject.transform.GetChild(0).gameObject;
+        if (isHorizontal) {
+            targetPosition = door.transform.position + (Vector3.left * slideDistance);    
+        } else {
+            targetPosition = door.transform.position + (Vector3.down * slideDistance);
+        }
         anim = GetComponent<Animator>();
     }
 
@@ -42,9 +48,9 @@ public class Button : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         //print("COLLIDED!");
-        if (collision.gameObject.CompareTag("Player") && !debounce) {
+        if (collision.gameObject.CompareTag("player projectile") && !debounce) {
             pressed = true;
             debounce = true;
             Slide();
