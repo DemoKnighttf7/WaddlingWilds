@@ -194,7 +194,7 @@ public class playermovement : MonoBehaviour
             else if (grounded && rb2d.velocity.y < 0)
             {
             state = "walking";
-            if ((Input.GetKey(KeyCode.Space)))
+            if ((Input.GetKey(KeyCode.Space)) || (Input.GetKey(KeyCode.W)))
                 {
                     Vector2 dashDirection = new Vector2(Input.GetAxis("Horizontal"), -(Input.GetAxis("Vertical"))).normalized;
                     print(dashDirection);
