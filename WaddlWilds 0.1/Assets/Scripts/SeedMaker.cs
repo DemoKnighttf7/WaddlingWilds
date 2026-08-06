@@ -56,11 +56,11 @@ public class SeedMaker : MonoBehaviour
             } else {
                 pressText.text = "" + (int)(resetTime-(Time.time-lastUsed));
             }
-            if (Input.GetKeyDown(KeyCode.Q) && seeds > 0) {
+            if (Input.GetKeyDown(KeyCode.Q) && realSeeds > 0) {
                 for(int i = 0; i < realSeeds; i++) {
                     Instantiate(loot, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
                 }
-                lastUsed = resetTime;
+                lastUsed = Time.time;
                 realSeeds = 0;
             }
         } else {

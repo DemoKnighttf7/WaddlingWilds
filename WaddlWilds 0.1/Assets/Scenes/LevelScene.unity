@@ -266,8 +266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -109.08081, y: 760}
-  m_SizeDelta: {x: -279.055, y: -409.761}
+  m_AnchoredPosition: {x: 484.62, y: 758.2437}
+  m_SizeDelta: {x: 908.34, y: -406.2483}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &111334014
 GameObject:
@@ -8779,8 +8779,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -109.08081, y: 704}
-  m_SizeDelta: {x: -279.055, y: -409.761}
+  m_AnchoredPosition: {x: 484.61755, y: 699.4353}
+  m_SizeDelta: {x: 908.3417, y: -400.6317}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &583492090
 PrefabInstance:
@@ -9387,6 +9387,8 @@ MonoBehaviour:
   fadeCoeif: 0.5
   doHitpts: 0
   deathEffect: {fileID: 0}
+  checkpoint: {fileID: 0}
+  doRespawns: 1
 --- !u!1001 &1176252646
 PrefabInstance:
   m_ObjectHideFlags: 0
