@@ -154,7 +154,8 @@ Transform:
   m_LocalPosition: {x: -6.238, y: -2.925, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 261235865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &135672992
@@ -337,18 +338,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0053248256, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.17, y: 0.96}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.19062206, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &261235864
 SpriteRenderer:
@@ -391,8 +392,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e20bafcd66b92834c892eb58408aefc8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -410,12 +411,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261235862}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.476, y: -1.9973, z: 0}
-  m_LocalScale: {x: 1, y: 3.7955, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.82050014, y: 0.21125, z: 0}
+  m_LocalScale: {x: 1, y: 0.948875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 135672991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &268608624
 GameObject:
@@ -743,6 +744,8 @@ MonoBehaviour:
   jumpSpeed: 12
   cam: {fileID: 0}
   loot: {fileID: 0}
+  mainUI: {fileID: 0}
+  seeds: 0
 --- !u!50 &819093951
 Rigidbody2D:
   serializedVersion: 4
@@ -1215,5 +1218,4 @@ SceneRoots:
   - {fileID: 268608627}
   - {fileID: 819093954}
   - {fileID: 308228357}
-  - {fileID: 261235865}
   - {fileID: 135672991}
