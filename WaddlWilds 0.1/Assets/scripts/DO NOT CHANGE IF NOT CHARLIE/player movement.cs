@@ -41,7 +41,11 @@ public class playermovement : MonoBehaviour
     public float swimGravity = 0.1f;
     public float gravity = 3f;
 
-    private Vector3 swimDir = new Vector3(0, 0, 0);
+    public Vector3 swimDir = new Vector3(0, 0, 0);
+
+    public GameObject swimParticles;
+
+    public float swimParticlesOffset = 1f;
 
     void Awake() {
         spriteRend = GetComponent<SpriteRenderer>();
@@ -71,7 +75,6 @@ public class playermovement : MonoBehaviour
         {
             state = "swimming";
             rb2d.gravityScale = swimGravity;
-            swimDir = rb2d.velocity.normalized;
         }
         else if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
         {
@@ -183,11 +186,13 @@ public class playermovement : MonoBehaviour
             canDash = false;
         }
 
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (state != "swimming")
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
             rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
             isSwimming = false;
+            spriteRenderer.flipY = false;
         }
         else
         {
@@ -204,6 +209,7 @@ public class playermovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
         if (state == "swimming")
         {
@@ -213,10 +219,20 @@ public class playermovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
 
-            swimDir.x += (Input.GetAxis("Horizontal") - swimDir.x) * 1f;
-            swimDir.y += (Input.GetAxis("Vertical") - swimDir.y) * 1f;
+            swimDir.x += (Input.GetAxis("Horizontal") - swimDir.x) * 0.01f;
+            swimDir.y += (Input.GetAxis("Vertical") - swimDir.y) * 0.01f;
 
             rb2d.velocity = transform.right * swimSpeed;
+
+            if(swimParticles != null) {
+                Instantiate(swimParticles, swimDir * swimParticlesOffset, swimParticles.transform.rotation);
+            }
+
+            if(rb2d.velocity.x > 0) {
+                spriteRenderer.flipY = false;
+            } else {
+                spriteRenderer.flipY = true;
+            }
         }
     }
 
