@@ -32,7 +32,11 @@ public class Button : MonoBehaviour
                 targetPosition = door.transform.position + (Vector3.right * slideDistance); 
             }
         } else {
-            targetPosition = door.transform.position + (Vector3.down * slideDistance);
+            if (flipped) {
+                targetPosition = door.transform.position + (Vector3.down * slideDistance);
+            } else {
+                targetPosition = door.transform.position + (Vector3.up * slideDistance); 
+            }
         }
         anim = GetComponent<Animator>();
     }
