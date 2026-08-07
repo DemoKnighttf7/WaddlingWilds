@@ -39,6 +39,9 @@ public class playermovement : MonoBehaviour
     public float seeds = 0f;
 
     public float swimGravity = 0.1f;
+    public float gravity = 3f;
+
+    private Vector3 swimDir = new Vector3(0, 0, 0);
 
     void Awake() {
         spriteRend = GetComponent<SpriteRenderer>();
@@ -68,28 +71,20 @@ public class playermovement : MonoBehaviour
         {
             state = "swimming";
             rb2d.gravityScale = swimGravity;
+            swimDir = rb2d.velocity.normalized;
         }
         else if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
         {
             state = "dashing";
-            rb2d.gravityScale = 1.5f;
+            rb2d.gravityScale = gravity;
         }
         else
         {
             state = "walking";
-            rb2d.gravityScale = 1.5f;
+            rb2d.gravityScale = gravity;
         }
     }
-
-    public float swimmingDirection()
-    {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 shootDir = (mousePos - (Vector2)transform.position).normalized;
-        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
-
-        return angle;
-    }
-
+    
     public void swimAngleFinder()
     {
         float returnAngle = 0;
@@ -105,10 +100,8 @@ public class playermovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, returnAngle);
         print(returnAngle);
     }
-
-    void LateUpdate()
-    {
-
+    
+    void Update() {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
         bool grounded = checkGrounded();
@@ -189,14 +182,7 @@ public class playermovement : MonoBehaviour
             dashTimer -= Time.deltaTime;
             canDash = false;
         }
-        else if (state == "swimming")
-        {
-            isWalking = false;
-            isSwimming = true;
-            rb2d.velocity = new Vector2 (0, 0); 
-            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+swimmingDirection()*swimTurnSpeed*Time.deltaTime);
-            transform.position = transform.position + new Vector3(Mathf.Cos((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), 0)*Time.deltaTime * swimSpeed;
-        }
+
         if (state != "swimming")
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -216,6 +202,24 @@ public class playermovement : MonoBehaviour
         anim.SetBool("Swimming", isSwimming);
     }
 
+    void FixedUpdate()
+    {
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+        if (state == "swimming")
+        {
+            isWalking = false;
+            isSwimming = true;
+            float angle = Mathf.Atan2(swimDir.y, swimDir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+
+            swimDir.x += (Input.GetAxis("Horizontal") - swimDir.x) * 1f;
+            swimDir.y += (Input.GetAxis("Vertical") - swimDir.y) * 1f;
+
+            rb2d.velocity = transform.right * swimSpeed;
+        }
+    }
+
 
     //ADDED BY JAKE
 
@@ -232,7 +236,7 @@ public class playermovement : MonoBehaviour
             mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 1f);
         }
         if (collision.gameObject.CompareTag("DIE")) {
-            GetComponent<Health>().Damage(99999);
+            GetComponent<Health>().Damage(GetComponent<Health>().currentHP + 1);
         }
     }
 }
