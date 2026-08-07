@@ -53,7 +53,8 @@ public class SeedMaker : MonoBehaviour
         }
 
         if (dist < pickDist) {
-            //pressQ.SetActive(true);
+            pressQ.SetActive(true);
+            Qsprite.SetActive(true);
             if(realSeeds > 0) {
                 pressText.text = ""; // REMOVED Q SINCE SPRITE IS THERE NOW
                 Qsprite.SetActive(true);
