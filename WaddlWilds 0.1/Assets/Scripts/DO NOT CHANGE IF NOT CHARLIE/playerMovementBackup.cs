@@ -223,6 +223,9 @@ public class playerMovementBackup : MonoBehaviour
             rb2d.velocity = new Vector2 (0, 0); 
             transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z+swimmingDirection()*swimTurnSpeed*Time.deltaTime);
             transform.position = transform.position + new Vector3(Mathf.Cos((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z + 90) * Mathf.Deg2Rad), 0)*Time.deltaTime * swimSpeed;
+            if (grounded){
+                GetComponent<Health>().Damage(GetComponent<Health>().currentHP + 1);
+            }
         }
         if (state != "swimming")
         {
@@ -259,7 +262,7 @@ public class playerMovementBackup : MonoBehaviour
             mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 1f);
         }
         if (collision.gameObject.CompareTag("DIE")) {
-            GetComponent<Health>().Damage(99999);
+            GetComponent<Health>().Damage(GetComponent<Health>().currentHP + 1);
         }
     }
 }
