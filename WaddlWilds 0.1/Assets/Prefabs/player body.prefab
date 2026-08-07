@@ -178,7 +178,7 @@ MonoBehaviour:
   maxSpeed: 5
   state: walking
   acceleration: 0.5
-  jumpSpeed: 5
+  jumpSpeed: 3
   canDash: 0
   dashSpeed: 40
   dashTimer: 0
