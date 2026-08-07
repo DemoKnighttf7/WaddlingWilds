@@ -20,6 +20,8 @@ public class water : MonoBehaviour
             print("Player entered");
             collision.gameObject.GetComponent<playermovement>().checkState("swimming");
             collision.gameObject.GetComponent<playermovement>().swimAngleFinder();
+
+            collision.gameObject.GetComponent<playermovement>().swimDir = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
         }
         else if (collision.gameObject.CompareTag("PlayerHead"))
         {
