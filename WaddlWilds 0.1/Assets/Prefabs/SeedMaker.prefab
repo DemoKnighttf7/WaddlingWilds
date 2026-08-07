@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af403cb4be0349c0914d6b3f0400f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeds: 10
+  seeds: 5
   randomizer: 1
   pickDist: 2
   loot: {fileID: 5168742291911296951, guid: 962f144dbeae4434d9710dbfdba83091, type: 3}
