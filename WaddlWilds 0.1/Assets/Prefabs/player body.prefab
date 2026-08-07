@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 7c37eb7608b4b0e4e9a1a34161591aa8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -178,7 +178,7 @@ MonoBehaviour:
   maxSpeed: 5
   state: walking
   acceleration: 0.5
-  jumpSpeed: 3
+  jumpSpeed: 10
   canDash: 0
   dashSpeed: 40
   dashTimer: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   isWalking: 0
   offsetX: 0
   seeds: 0
+  swimGravity: 0.1
 --- !u!95 &8559513834969032334
 Animator:
   serializedVersion: 5
