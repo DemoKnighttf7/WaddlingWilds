@@ -192,7 +192,6 @@ public class playermovement : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
             rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
             isSwimming = false;
-            spriteRenderer.flipY = false;
         }
         else
         {
@@ -216,22 +215,22 @@ public class playermovement : MonoBehaviour
             isWalking = false;
             isSwimming = true;
             float angle = Mathf.Atan2(swimDir.y, swimDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90f));
 
 
             swimDir.x += (Input.GetAxis("Horizontal") - swimDir.x) * 0.01f;
             swimDir.y += (Input.GetAxis("Vertical") - swimDir.y) * 0.01f;
 
-            rb2d.velocity = transform.right * swimSpeed;
+            rb2d.velocity = transform.up * swimSpeed;
 
             if(swimParticles != null) {
                 Instantiate(swimParticles, swimDir * swimParticlesOffset, swimParticles.transform.rotation);
             }
 
             if(rb2d.velocity.x > 0) {
-                spriteRenderer.flipY = false;
+                spriteRenderer.flipX = true;
             } else {
-                spriteRenderer.flipY = true;
+                spriteRenderer.flipX = false;
             }
         }
     }
