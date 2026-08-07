@@ -281,6 +281,7 @@ MonoBehaviour:
   player: {fileID: 381147912}
   cameraZone: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
+  maxCamDist: 10
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +855,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player body
       objectReference: {fileID: 0}
+    - target: {fileID: 6772086454427554664, guid: 80be60e4fcdd09e419d7b66660d397c0, type: 3}
+      propertyPath: swimParticles
+      value: 
+      objectReference: {fileID: 5778539174751363214, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -924,6 +929,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a7687f342677e41b13286f2dc41ba3, type: 3}
+--- !u!1001 &5543986754700055785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.731274
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9664497
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.3315742
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2455054982695266952, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778539174751363214, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
+      propertyPath: m_Name
+      value: swimParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4675ee10301e846e298ed23c51dd75a7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -935,3 +997,4 @@ SceneRoots:
   - {fileID: 1134958088}
   - {fileID: 1039504883}
   - {fileID: 1574481867}
+  - {fileID: 5543986754700055785}
