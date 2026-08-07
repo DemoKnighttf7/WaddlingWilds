@@ -24,10 +24,13 @@ public class SeedMaker : MonoBehaviour
 
     private TMP_Text pressText;
 
+    public GameObject Qsprite;
+
     void Start()
     {
         pressQ = transform.Find("Canvas").gameObject;
         pressQ.SetActive(false);
+        Qsprite.SetActive(false);
         player = GameObject.FindWithTag("Player");
 
         pressText = pressQ.transform.Find("pressQ/Text").GetComponent<TMP_Text>();
@@ -53,8 +56,10 @@ public class SeedMaker : MonoBehaviour
             //pressQ.SetActive(true);
             if(realSeeds > 0) {
                 pressText.text = ""; // REMOVED Q SINCE SPRITE IS THERE NOW
+                Qsprite.SetActive(true);
             } else {
                 pressQ.SetActive(true);
+                Qsprite.SetActive(false);
                 pressText.text = "" + (int)(resetTime-(Time.time-lastUsed));
             }
             if (Input.GetKeyDown(KeyCode.Q) && realSeeds > 0) {
@@ -65,6 +70,7 @@ public class SeedMaker : MonoBehaviour
                 realSeeds = 0;
             }
         } else {
+            Qsprite.SetActive(false);
             pressQ.SetActive(false);
         }
     }
