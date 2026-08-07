@@ -12,6 +12,7 @@ TagManager:
   - Teleporter
   - Door
   - MainUI
+  - DIE
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,16 @@ public class Health : MonoBehaviour
 
     public bool doHitpts = true;
 
+    public GameObject deathEffect;
+
+    public GameObject checkpoint;
+
+    public bool doRespawns = false;
+
+    private Vector3 startPos;
+
+    private Canvas mainUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +51,9 @@ public class Health : MonoBehaviour
         if(onDamage != null) {
             onDamage.SetActive(true);
         }
+        
+        startPos = transform.position;
+        mainUI = GameObject.FindWithTag("MainUI").GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -79,7 +92,29 @@ public class Health : MonoBehaviour
             if(hitPoints != null) {
                 hitPoints.text = "";
             }
-            Destroy(gameObject);
+
+            if(deathEffect != null) {
+                Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+            }
+            if(doRespawns) {
+                currentHP = MaxHP;
+                GetComponent<playermovement>().seeds = 0f;
+
+                Vector3 newPos;
+
+                if(checkpoint != null) {
+                    newPos = checkpoint.transform.position;
+                } else {
+                    newPos = startPos;
+                }
+                newPos.z = transform.position.z;
+                newPos.y += 1.5f;
+                transform.position = newPos;
+                mainUI.GetComponent<UIManagerForNonHealthThings>().fade(0.1f, 2f);
+
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 }

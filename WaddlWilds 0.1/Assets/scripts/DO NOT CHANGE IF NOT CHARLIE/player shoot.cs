@@ -13,6 +13,7 @@ public class playershoot : MonoBehaviour
     //Flipping head horizontally intializing
     private SpriteRenderer spriteRend;
     public float bodyOffsetAmount;
+    private float deadZone = 0.5f;
 
     void Awake() {
         spriteRend = GetComponent<SpriteRenderer>();
@@ -85,12 +86,20 @@ public class playershoot : MonoBehaviour
         //print(rotation);
 
         //FLIPPING PLAYER HEAD HORIZONTALLY
-        if (rotation > 90f || rotation < -90f) {
+        // if (rotation > 90.01f || rotation < -90.01f) {
+        //     spriteRend.flipY = true;
+        //     offsetAmount = new Vector3(-0.055f + bodyOffsetAmount, 0.375f, 0f);
+        // } else {
+        //     spriteRend.flipY = false;
+        //     offsetAmount = new Vector3(-0.3f + bodyOffsetAmount, 0.375f, 0f);
+        // }
+
+        if (mousePos.x > transform.position.x + deadZone) {
             spriteRend.flipY = true;
-            offsetAmount = new Vector3(-0.055f + bodyOffsetAmount, 0.375f, 0f);
-        } else {
+            offsetAmount = new Vector3(-0.055f + bodyOffsetAmount, 0.325f, 0f);
+        } else if (mousePos.x < transform.position.x - deadZone) {
             spriteRend.flipY = false;
-            offsetAmount = new Vector3(-0.3f + bodyOffsetAmount, 0.375f, 0f);
+            offsetAmount = new Vector3(-0.3f + bodyOffsetAmount, 0.325f, 0f);
         }
     }
 }
