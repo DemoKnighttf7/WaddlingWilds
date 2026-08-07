@@ -12,11 +12,15 @@ public class Checkpoint : MonoBehaviour
 
     private bool curPoint = false;
 
+    Animator anim;
+
     void Start()
     {
         pressE = transform.Find("Canvas").gameObject;
         pressE.SetActive(false);
         player = GameObject.FindWithTag("Player");
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,5 +48,7 @@ public class Checkpoint : MonoBehaviour
         } else {
             pressE.SetActive(false);
         }
+
+        anim.SetBool("Activated", curPoint);
     }
 }

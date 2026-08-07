@@ -50,10 +50,11 @@ public class SeedMaker : MonoBehaviour
         }
 
         if (dist < pickDist) {
-            pressQ.SetActive(true);
+            //pressQ.SetActive(true);
             if(realSeeds > 0) {
-                pressText.text = "Q";
+                pressText.text = ""; // REMOVED Q SINCE SPRITE IS THERE NOW
             } else {
+                pressQ.SetActive(true);
                 pressText.text = "" + (int)(resetTime-(Time.time-lastUsed));
             }
             if (Input.GetKeyDown(KeyCode.Q) && realSeeds > 0) {
