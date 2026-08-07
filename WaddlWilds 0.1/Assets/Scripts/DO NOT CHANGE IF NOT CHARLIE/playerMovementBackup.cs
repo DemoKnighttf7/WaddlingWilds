@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playermovement : MonoBehaviour
+public class playerMovementBackup : MonoBehaviour
 {
     public float yvelocity;
     public float xvelocity;
@@ -38,8 +38,6 @@ public class playermovement : MonoBehaviour
 
     public float seeds = 0f;
 
-    public float swimGravity = 0.1f;
-
     void Awake() {
         spriteRend = GetComponent<SpriteRenderer>();
     }
@@ -62,32 +60,61 @@ public class playermovement : MonoBehaviour
     // has to be called overridevar because override causes errors
     public void checkState(string overrideVar = "none")
     {
-        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
         bool grounded = checkGrounded();
         if ((overrideVar == "swimming" || state == "swimming") && overrideVar != "walking")
         {
             state = "swimming";
-            rb2d.gravityScale = swimGravity;
         }
         else if ((Input.GetKeyDown(KeyCode.F) && canDash) || state == "dashing")
         {
             state = "dashing";
-            rb2d.gravityScale = 1.5f;
         }
         else
         {
             state = "walking";
-            rb2d.gravityScale = 1.5f;
         }
     }
 
     public float swimmingDirection()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 shootDir = (mousePos - (Vector2)transform.position).normalized;
-        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+        float swimDir = 0;
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            if (transform.eulerAngles.z > 180)
+            {
+                transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z - 360);
+            }
 
-        return angle;
+            if ((transform.eulerAngles.z > -90 && transform.eulerAngles.z < 90) || (transform.eulerAngles.z > 270 && transform.eulerAngles.z < 450))
+            {
+                swimDir = -(Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal"));
+            }
+            else if (Mathf.Round(transform.eulerAngles.z) != 90 && Mathf.Round(transform.eulerAngles.z) != -90 && Mathf.Round(transform.eulerAngles.z) != 270 && Mathf.Round(transform.eulerAngles.z) != 450 && Mathf.Round(transform.eulerAngles.z) != 91 && Mathf.Round(transform.eulerAngles.z) != -89 && Mathf.Round(transform.eulerAngles.z) != 271 && Mathf.Round(transform.eulerAngles.z) != 451)
+            {
+                swimDir = Mathf.Abs(Input.GetAxis("Horizontal")) / Input.GetAxis("Horizontal");
+            }
+         }
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180)
+            {
+                print("1 "+transform.eulerAngles.z.ToString());
+                swimDir -= Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
+            }
+            else if (Mathf.Round(transform.eulerAngles.z) != 0 && Mathf.Round(transform.eulerAngles.z) != 180)
+            {
+                swimDir += Mathf.Abs(Input.GetAxis("Vertical")) / Input.GetAxis("Vertical");
+                print("2 " + transform.eulerAngles.z.ToString());
+            }
+        }
+        print(swimDir); 
+        if (swimDir != 0)
+        {
+            swimDir = Mathf.Abs(swimDir) / swimDir;
+        }
+
+        return swimDir;
     }
 
     public void swimAngleFinder()
